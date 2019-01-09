@@ -1,0 +1,2 @@
+Валидация do аргумента (фильтр) in process -> delete region list refresh from help later
+Рефакторинг html шаблона.

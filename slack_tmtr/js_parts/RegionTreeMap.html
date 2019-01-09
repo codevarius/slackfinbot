@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>tree map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="d3/d3.js"></script>
+    <script src="wrapper.js?v=0.02"></script>
+    <script src="saveSvgAsPng.js?v=0.02"></script>
+    <script src="config.js?v=0.02"></script>
+    <script src="randRGB.js?v=0.02"></script>
+</head>
+<body>
+    <script>
+
+        function dateToStr(dateParam)
+            {
+                var dd = dateParam.getDate();
+                var mm = dateParam.getMonth()+1; 
+                var yyyy = dateParam.getFullYear();
+                if(dd<10) 
+                {
+                    dd='0'+dd;
+                } 
+
+                if(mm<10) 
+                {
+                    mm='0'+mm;
+                } 
+                return dd+'.'+mm+'.'+yyyy;
+            }
+    
+        //drawing board
+        var canvas = d3.select("body").append("svg")
+            .attr("width",MAIN_WIDTH)
+            .attr("height",MAIN_HEIGHT);
+        
+        //treemap structure
+        var treemap = d3.treemap()
+            .size([MAIN_WIDTH,MAIN_HEIGHT])
+            .paddingOuter(MAIN_PADDING);
+    
+        //bake json
+        var request = new XMLHttpRequest();
+        request.open("GET", "dt_region_tmap.json?time=" + new Date().getTime(), false);
+        request.send(null);
+        var data = JSON.parse(request.responseText);
+        var root = d3.hierarchy(data);
+        request = null;
+        //calculate root
+        root
+            .sum(function (d){ return d.value;})
+            .sort(function(a, b) { return b.height - a.height || b.value - a.value; });
+        
+        //put root into treemap
+        treemap(root);
+        //get max & min value TODO change that later to proper val
+        var minmax = getMinMax(root.descendants());
+        //draw treemap
+        //cells aka containers
+        var cells = canvas
+                        .selectAll('g')
+                        .data(root.descendants())
+                        .enter()
+                        .append('g');
+
+        // filters go in defs element
+        var defs = canvas.append("defs");
+
+        // create filter with id #drop-shadow
+        // height=130% so that the shadow is not clipped
+        var filter = defs.append("filter")
+            .attr("id", "drop-shadow")
+            .attr("height", "130%");
+
+        // SourceAlpha refers to opacity of graphic that this filter will be applied to
+        // convolve that with a Gaussian with standard deviation 3 and store result
+        // in blur
+        filter.append("feGaussianBlur")
+            .attr("in", "SourceAlpha")
+            .attr("stdDeviation", 2)
+            .attr("result", "blur");
+
+        // translate output of Gaussian blur to the right and downwards with 2px
+        // store result in offsetBlur
+        filter.append("feOffset")
+            .attr("in", "blur")
+            .attr("dx", 5)
+            .attr("dy", 5)
+            .attr("result", "offsetBlur");
+
+        // overlay original SourceGraphic over translated blurred opacity by using
+        // feMerge filter. Order of specifying inputs is important!
+        var feMerge = filter.append("feMerge");
+
+        feMerge.append("feMergeNode")
+            .attr("in", "offsetBlur")
+        feMerge.append("feMergeNode")
+            .attr("in", "SourceGraphic");
+        
+        //rect             
+        var rects = cells 
+                        .append('rect')
+                        .attr('stroke','white')
+                        .attr('fill', function(d){
+                            if(d.data['name'] != 'Продажи')
+                                return perc2color(((d.data['std_value'] - d.data['std_pvalue'])/d.data['std_pvalue']))
+                            else
+                                return 'rgb(255,255,255)'
+                        })
+                        .attr('x', function(d) { return d.x0; })
+                        .attr('y', function(d) { return d.y0; })
+                        .attr('rx', NODE_ROUND_R)
+                        .attr('ry', NODE_ROUND_R)
+                        .attr('width', function(d) {
+                            var width = d.x1 - d.x0;
+                            return width - NODE_PADDING; })
+                        .attr('height', function(d) { 
+                            var height = d.y1 - d.y0;
+                            return d.y1 - d.y0 - NODE_PADDING; })
+                        .style('stroke','dark_brown')
+                        .style('stroke-width',STROKE_WIDTH)
+                        .style('opacity', NODE_OPACITY)
+                        .style('filter','url(#drop-shadow)');
+
+        var sList = [];
+        var sum = 0;
+        root.descendants().forEach(element => {
+            var s = (element.x1 - element.x0)// * (element.y1 - element.y0);
+            if(s != (root.x1-root.x0))// * (root.y1-root.y0)))
+                sList.push(s);
+                sum += s;
+        });
+        maxS = (sum/sList.length);
+        //console.log(maxS)
+
+        //line 1
+        var info = cells
+                        .append('text')
+                        .text(function(d){
+                            if(d.data['value'] != undefined)
+                                return d.data['name']
+                            else
+                                return d.data['name'] + d.data['region'] 
+                                + '    total sales:' 
+                                + d.data['total'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")  + '€'
+                                +"    period:"
+                                + d.data['dfrom'] 
+                                + '--' 
+                                + d.data['dto']
+                        })
+                        .attr('font-size',function(d){
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                var fs = STD_FONT_SIZE * (width/maxS)
+                                return fs;
+                            }else{
+                                return 18;
+                            }
+                        })
+                        .attr('id', 'info')
+                        .attr('x', function(d) { 
+                            return d.x0 + TEXT_PADDING_X;
+                        })
+                        .attr('y', function(d) {
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                return d.y0 + (STD_FONT_SIZE * (width/maxS));
+                            }else{
+                                return d.y0 + TEXT_PADDING_Y;
+                            }
+                        })
+                        .attr('width', function(d) { return d.x1 - d.x0; })
+                        .attr('height', function(d) { return d.y1 - d.y0; })
+                        .style('font-family', FONT);
+        
+        //line 2 fact
+        var info2 = cells
+                        .append('text')
+                        .text(function(d){
+                            if(d.data['value'] != undefined)
+                                return 'Факт: ' + d.data['value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") 
+                                + '€ vs ' + d.data['pvalue'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + '€';
+                            
+                        })
+                        .attr('font-size',function(d){
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                return STD_FONT_SIZE * (width/maxS);
+                            }
+                        })
+                        .attr('id', 'info')
+                        .attr('x', function(d) { 
+                            return d.x0 + TEXT_PADDING_X;
+                        })
+                        .attr('y', function(d) {
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                return d.y0 + (STD_FONT_SIZE * (width/maxS) * 2);
+                            }
+                        })
+                        .attr('width', function(d) { return d.x1 - d.x0; })
+                        .attr('height', function(d) { return d.y1 - d.y0; })
+                        .style('font-family', FONT);
+                        
+        //line 3 normalized
+        var info3 = cells
+                        .append('text')
+                        .text(function(d){
+                            if(d.data['value'] != undefined)
+                                return 'Стд.: ' + d.data['std_value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") 
+                                + '€ vs ' + d.data['std_pvalue'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + '€';
+                            
+                        })
+                        .attr('opacity', 0.5)
+                        .attr('font-size',function(d){
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                return STD_FONT_SIZE * (width/maxS);
+                            }
+                        })
+                        .attr('id', 'info')
+                        .attr('x', function(d) { 
+                            return d.x0 + TEXT_PADDING_X;
+                        })
+                        .attr('y', function(d) {
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                return d.y0 + (STD_FONT_SIZE * (width/maxS) * 3);
+                            }
+                        })
+                        .attr('width', function(d) { return d.x1 - d.x0; })
+                        .attr('height', function(d) { return d.y1 - d.y0; })
+                        .style('font-family', FONT);
+
+        //line 4 change proc
+        var info4 = cells
+                        .append('text')
+                        .text(function(d){
+                            if(d.data['value'] != undefined)
+                                return 'Изм.: ' + Math.round(((d.data['std_value'] - d.data['std_pvalue'])/d.data['std_pvalue']) * 100) + '%';
+                            
+                        })
+                        .attr('font-size',function(d){
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                return STD_FONT_SIZE * (width/maxS);
+                            }
+                        })
+                        .attr('id', 'info')
+                        .attr('x', function(d) { 
+                            return d.x0 + TEXT_PADDING_X;
+                        })
+                        .attr('y', function(d) {
+                            var width = d.x1 - d.x0;
+                            var height = d.y1 - d.y0;
+                            var s = width * height;
+                        
+                            if(d.data['name'] != 'Продажи'){
+                                return d.y0 + (STD_FONT_SIZE * (width/maxS) * 4);
+                            }
+                        })
+                        .attr('width', function(d) { return d.x1 - d.x0; })
+                        .attr('height', function(d) { return d.y1 - d.y0; })
+                        .style('font-family', FONT);
+                   
+        saveSvgAsPng(document.getElementsByTagName("svg")[0], dateToStr(new Date()) + root.data['region'].replace(/\s/g, '') + "region_treemap.png");
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+1. Поместить папку slack_treemap со всем содержимым в выбранную директорию.
+2. В файле cnf.py отредактировать поля (см. комментарии к полям) 
+   BOT_TOKEN, OUTPUT_IMG_PATH, SQL_OUTPUT_PATH, DATA_MAINE_DEPH.
+3. Открыть командную строку и с помощью команды 'cd' перейти в папку slack_treemap.
+4. Выполнить команду 'python launcher.py'

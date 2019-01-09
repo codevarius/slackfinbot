@@ -1,0 +1,80 @@
+{
+	"name":"Продажи",
+	"total":19155847,
+	"dfrom":"2-07-2018",
+	"dto":"30-10-2018",
+	"children":[
+		{"name":"Башкортостан Респ","value":111254,"pvalue":211315,"change":-100061,"std_value":110160,"std_pvalue":167641}
+		,{"name":"Белорусия ","value":5385,"pvalue":4967,"change":419,"std_value":5952,"std_pvalue":4967}
+		,{"name":"Карачаево-Черкесская Респ","value":21108,"pvalue":39803,"change":-18695,"std_value":19998,"std_pvalue":39574}
+		,{"name":"Карелия Респ","value":141296,"pvalue":92806,"change":48490,"std_value":138081,"std_pvalue":87300}
+		,{"name":"Кемеровская обл","value":106055,"pvalue":236340,"change":-130285,"std_value":111780,"std_pvalue":231199}
+		,{"name":"Кировская обл","value":257452,"pvalue":286016,"change":-28563,"std_value":243767,"std_pvalue":261023}
+		,{"name":"Москва","value":1547560,"pvalue":1691377,"change":-143817,"std_value":1677804,"std_pvalue":1640125}
+		,{"name":"Новгородская обл","value":114079,"pvalue":151107,"change":-37028,"std_value":103969,"std_pvalue":128343}
+		,{"name":"Орловская обл","value":62270,"pvalue":79424,"change":-17153,"std_value":66464,"std_pvalue":79424}
+		,{"name":"Пензенская обл","value":248899,"pvalue":244406,"change":4493,"std_value":228745,"std_pvalue":204811}
+		,{"name":"Ростовская обл","value":652334,"pvalue":606597,"change":45737,"std_value":713449,"std_pvalue":603633}
+		,{"name":"Рязанская обл","value":257499,"pvalue":436795,"change":-179297,"std_value":284604,"std_pvalue":436795}
+		,{"name":"Санкт-Петербург","value":832237,"pvalue":963555,"change":-131318,"std_value":837364,"std_pvalue":856541}
+		,{"name":"Ставропольский край","value":253048,"pvalue":326312,"change":-73263,"std_value":271739,"std_pvalue":318743}
+		,{"name":"Тамбовская обл","value":51381,"pvalue":90454,"change":-39074,"std_value":56789,"std_pvalue":90454}
+		,{"name":"Томская обл","value":101945,"pvalue":114851,"change":-12906,"std_value":100510,"std_pvalue":90919}
+		,{"name":"Удмуртская Респ","value":32113,"pvalue":32088,"change":26,"std_value":35493,"std_pvalue":32088}
+		,{"name":"Алтайский край","value":327704,"pvalue":389159,"change":-61455,"std_value":333586,"std_pvalue":373349}
+		,{"name":"Белгородская обл","value":521823,"pvalue":615440,"change":-93617,"std_value":571559,"std_pvalue":612101}
+		,{"name":"Волгоградская обл","value":407660,"pvalue":478296,"change":-70636,"std_value":450571,"std_pvalue":478296}
+		,{"name":"Вологодская обл","value":305426,"pvalue":261896,"change":43530,"std_value":333136,"std_pvalue":261896}
+		,{"name":"Дагестан Респ","value":161079,"pvalue":152505,"change":8574,"std_value":175670,"std_pvalue":149162}
+		,{"name":"Ивановская обл","value":130081,"pvalue":112468,"change":17613,"std_value":143773,"std_pvalue":112468}
+		,{"name":"Иркутская обл","value":85967,"pvalue":82933,"change":3034,"std_value":91748,"std_pvalue":70645}
+		,{"name":"Казахстан","value":50137,"pvalue":42236,"change":7901,"std_value":53134,"std_pvalue":42236}
+		,{"name":"Курская обл","value":218206,"pvalue":231117,"change":-12911,"std_value":239012,"std_pvalue":231117}
+		,{"name":"Марий Эл Респ","value":115878,"pvalue":96178,"change":19700,"std_value":103836,"std_pvalue":87403}
+		,{"name":"Омская обл","value":174897,"pvalue":208575,"change":-33678,"std_value":192733,"std_pvalue":200554}
+		,{"name":"Пермский край","value":386282,"pvalue":282100,"change":104181,"std_value":421437,"std_pvalue":281998}
+		,{"name":"Приморский край","value":151883,"pvalue":123794,"change":28089,"std_value":167870,"std_pvalue":123794}
+		,{"name":"Санкт-Петербург г","value":19189,"pvalue":12766,"change":6423,"std_value":20100,"std_pvalue":12388}
+		,{"name":"Саратовская обл","value":255500,"pvalue":204974,"change":50526,"std_value":238705,"std_pvalue":182725}
+		,{"name":"Тульская обл","value":154302,"pvalue":154458,"change":-156,"std_value":145470,"std_pvalue":135017}
+		,{"name":"Хабаровский край","value":279815,"pvalue":336731,"change":-56916,"std_value":309269,"std_pvalue":332404}
+		,{"name":"Хакасия Респ","value":12953,"pvalue":23994,"change":-11041,"std_value":14263,"std_pvalue":23994}
+		,{"name":"Челябинская обл","value":249099,"pvalue":238448,"change":10651,"std_value":275320,"std_pvalue":238448}
+		,{"name":"Ярославская обл","value":118850,"pvalue":92516,"change":26334,"std_value":131361,"std_pvalue":92516}
+		,{"name":"Бурятия Респ","value":42890,"pvalue":30990,"change":11900,"std_value":47404,"std_pvalue":30335}
+		,{"name":"Воронежская обл","value":357270,"pvalue":360175,"change":-2905,"std_value":378893,"std_pvalue":360175}
+		,{"name":"Кабардино-Балкарская Респ","value":20736,"pvalue":39973,"change":-19236,"std_value":22352,"std_pvalue":37340}
+		,{"name":"Коми Респ","value":88260,"pvalue":26985,"change":61275,"std_value":97551,"std_pvalue":26985}
+		,{"name":"Московская обл","value":2129503,"pvalue":2140494,"change":-10992,"std_value":2303010,"std_pvalue":2120351}
+		,{"name":"Мурманская обл","value":9367,"pvalue":8214,"change":1152,"std_value":10353,"std_pvalue":8214}
+		,{"name":"Ненецкий АО","value":106868,"pvalue":53069,"change":53799,"std_value":118117,"std_pvalue":48289}
+		,{"name":"Нижегородская обл","value":514965,"pvalue":580515,"change":-65551,"std_value":508202,"std_pvalue":488069}
+		,{"name":"Новосибирская обл","value":316446,"pvalue":402398,"change":-85952,"std_value":326818,"std_pvalue":365296}
+		,{"name":"Ростов-на-Дону","value":0,"pvalue":382,"change":-382,"std_value":0,"std_pvalue":382}
+		,{"name":"Смоленская обл","value":117581,"pvalue":131573,"change":-13992,"std_value":129958,"std_pvalue":131573}
+		,{"name":"Татарстан Респ","value":752761,"pvalue":921314,"change":-168553,"std_value":752434,"std_pvalue":804155}
+		,{"name":"Тюменская обл","value":89006,"pvalue":180743,"change":-91737,"std_value":98375,"std_pvalue":180743}
+		,{"name":"Ульяновская обл","value":265333,"pvalue":419485,"change":-154152,"std_value":256335,"std_pvalue":320562}
+		,{"name":"Ханты-Мансийский Автономный округ - Югра АО","value":611202,"pvalue":551445,"change":59757,"std_value":675540,"std_pvalue":551445}
+		,{"name":"Чувашская Респ","value":139639,"pvalue":180643,"change":-41004,"std_value":140877,"std_pvalue":148316}
+		,{"name":"Брянская обл","value":290328,"pvalue":190598,"change":99730,"std_value":263411,"std_pvalue":152112}
+		,{"name":"Владимирская обл","value":341779,"pvalue":342838,"change":-1059,"std_value":377500,"std_pvalue":342339}
+		,{"name":"Забайкальский край","value":363,"pvalue":2983,"change":-2620,"std_value":401,"std_pvalue":2983}
+		,{"name":"Калужская обл","value":160241,"pvalue":227723,"change":-67481,"std_value":146597,"std_pvalue":204117}
+		,{"name":"Костромская обл","value":240136,"pvalue":243202,"change":-3066,"std_value":265414,"std_pvalue":243202}
+		,{"name":"Краснодарский край","value":910269,"pvalue":977229,"change":-66960,"std_value":969308,"std_pvalue":963772}
+		,{"name":"Красноярский край","value":399583,"pvalue":350540,"change":49043,"std_value":411441,"std_pvalue":333302}
+		,{"name":"Курганская обл","value":10962,"pvalue":20331,"change":-9369,"std_value":12116,"std_pvalue":20331}
+		,{"name":"Ленинградская обл","value":86294,"pvalue":78649,"change":7645,"std_value":89730,"std_pvalue":72823}
+		,{"name":"Липецкая обл","value":513243,"pvalue":537661,"change":-24418,"std_value":549746,"std_pvalue":537661}
+		,{"name":"Магаданская обл","value":80160,"pvalue":45960,"change":34200,"std_value":68430,"std_pvalue":34681}
+		,{"name":"Оренбургская обл","value":157791,"pvalue":197107,"change":-39315,"std_value":174401,"std_pvalue":196248}
+		,{"name":"Псковская обл","value":9648,"pvalue":6662,"change":2985,"std_value":9357,"std_pvalue":5623}
+		,{"name":"Республика Крым","value":216970,"pvalue":229481,"change":-12511,"std_value":233421,"std_pvalue":229481}
+		,{"name":"Самарская обл","value":527918,"pvalue":590453,"change":-62535,"std_value":488323,"std_pvalue":451429}
+		,{"name":"Свердловская обл","value":365980,"pvalue":340285,"change":25694,"std_value":404504,"std_pvalue":340285}
+		,{"name":"Тверская обл","value":178459,"pvalue":231272,"change":-52814,"std_value":171920,"std_pvalue":192707}
+		,{"name":"Украина","value":139115,"pvalue":181505,"change":-42390,"std_value":151202,"std_pvalue":181505}
+		,{"name":"Чеченская Республика","value":42135,"pvalue":67307,"change":-25172,"std_value":45350,"std_pvalue":66728}
+		]
+}
